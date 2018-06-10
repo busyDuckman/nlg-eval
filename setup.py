@@ -1,7 +1,12 @@
 #!/usr/bin/env python2.7
 
 from setuptools import setup
-from pip.req import parse_requirements
+
+def parse_requirements(filename):
+    """ load requirements from a pip requirements file """
+    lineiter = (line.strip() for line in open(filename))
+    return [line for line in lineiter if line and not line.startswith("#")]
+
 install_reqs = parse_requirements('requirements.txt', session=False)
 # reqs is a list of requirement
 # e.g. ['django==1.5.1', 'mezzanine==1.4.6']
